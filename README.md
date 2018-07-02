@@ -1,13 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <meta http-equiv="Content-Style-Type" content="text/css" />
-  <meta name="generator" content="pandoc" />
-  <title></title>
-  <style type="text/css">code{white-space: pre;}</style>
-  <link rel="stylesheet" href="sl" type="text/css" />
-</head>
 <body>
 <h1 id="sebal-model-by-means-grass-and-python">SEBAL model by means GRASS and PYTHON</h1>
 <h2 id="motivation">Motivation</h2>
@@ -24,7 +14,15 @@
 </ul></li>
 <li>Python 3.x, sugestion: <a href="https://anaconda.org/anaconda/python">CONDA</a></li>
 </ul>
-<p>Make sure your system has Python Libraries: - math - numpy - os - grass_session - grass.script - osgeo</p>
+<p>Make sure your system has Python Libraries:</p>
+<ul>
+<li>math</li>
+<li>numpy</li>
+<li>os</li>
+<li>grass_session</li>
+<li>grass.script</li>
+<li>osgeo</li>
+</ul>
 <h2 id="how-to-use">How to use</h2>
 <ol style="list-style-type: decimal">
 <li>Download at Landsat 8 images (LS8 - OLI/TIRS)</li>

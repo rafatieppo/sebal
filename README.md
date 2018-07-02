@@ -49,19 +49,7 @@
 <p>Tested on Ubuntu 16.04 LTS</p>
 <h2 id="references">References</h2>
 <?xml version="1.0" encoding="utf-8"?>
-<style xmlns="http://purl.org/net/xbiblio/csl" version="1.0" default-locale="en-US">
-  <!-- Generated with https://github.com/citation-style-language/utilities/tree/master/generate_dependent_styles/data/elsevier -->
-  <info>
-    <title>Computers and Electronics in Agriculture</title>
-    <id>http://www.zotero.org/styles/computers-and-electronics-in-agriculture</id>
-    <link href="http://www.zotero.org/styles/computers-and-electronics-in-agriculture" rel="self"/>
-    <link href="http://www.zotero.org/styles/elsevier-harvard" rel="independent-parent"/>
-    <category citation-format="author-date"/>
-    <issn>0168-1699</issn>
-    <updated>2014-05-18T02:57:11+00:00</updated>
-    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
-  </info>
-</style>
+
 <div id="refs" class="references">
 <div id="ref-BASTIAANSSEN2000">
 <p>Bastiaanssen, W G M. 2000. “SEBAL-based sensible and latent heat fluxes in the irrigated Gediz Basin, Turkey.” <em>Journal of Hydrology</em> 229 (1): 87–100. doi:<a href="https://doi.org/https://doi.org/10.1016/S0022-1694(99)00202-4">https://doi.org/10.1016/S0022-1694(99)00202-4</a>.</p>

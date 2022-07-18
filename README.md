@@ -6,65 +6,21 @@
 <p>In the last decades the remote sensing techniques has been used to identify landscapes, soil classes, and water energy balance as well, providing conditions to analyze data in a regional scale. By means orbital sensors and algorithms to convert digital numbers to reflectance and radiation flux, remotesensing methods to predict the evapotranspiration is a important tool to handle the hydrological cycle <span class="citation">(Bernardo et al., 2006)</span>.</p>
 <p>The SEBAL (Surface Energy Balance Algorithm for Land) uses the surface energy balance to predict some hydrological features (evapotranspiration, water deficit, etc) and Its main creator is Professor Wim G. M. Bastiaanssen <span class="citation">(Bastiaanssen et al., 1998)</span>. That method has been validated under several conditions for different locations (<span class="citation">(Bastiaanssen, 2000)</span>,<span class="citation">(Bastiaanssen et al., 2002)</span>, <span class="citation">(Santos et al., 2010)</span>).</p>
 <p>There are several available algorithms to evapotranspiration prediction (<span class="citation">(Wolff, 2016)</span>, <span class="citation">(Cavalcante et al., 2016)</span>, <span class="citation">(Hessels et al., 2017)</span>). However is missing a specific code to run on python 3 and GRASS 74. Thus we aimed to implement SEBAL model for Landsat 8 iamges using the language Python version 3 <span class="citation">(Rossum, 1995)</span> and GRASS version 7.4 <span class="citation">(Neteler et al., 2012)</span>.</p>
-<h2 id="requirements">Requirements</h2>
-<ul>
-<li><a href="https://grass.osgeo.org/#">GRASS GIS version 7.4</a>
-<ul>
-<li>GRASS GUI</li>
-<li>GRASS DEV</li>
-</ul></li>
-<li>Python 3.x, sugestion: <a href="https://anaconda.org/anaconda/python">CONDA</a></li>
-</ul>
-<p>Make sure your system has Python Libraries:</p>
-<ul>
-<li>math</li>
-<li>numpy</li>
-<li>os</li>
-<li>grass_session</li>
-<li>grass.script</li>
-<li>osgeo</li>
-</ul>
-<p>NOTE: About packages instalation</p>
-<ul>
-<li>The packs <code>math</code> and <code>os</code> are standard in Python3</li>
-<li>To install <strong>numpy</strong>, you may use:<br />
-<code>pip3 install numpy</code></li>
-<li>To install <strong>grass_session</strong> and <strong>grass.script</strong>, you may use:<br />
-<code>pip3 install grass-session</code></li>
-<li><strong>osgeo</strong> is from <strong>gdal</strong>. Thus you may install gdal:
-<ul>
-<li>if you don't have gdal 1.11 already installed:<br />
-<code>sudo apt-get install gdal-bin python-gdal python3-gdal</code></li>
-<li>if you want only gdal for python3:<br />
-<code>sudo apt-get install python3-gdal</code></li>
-</ul></li>
-</ul>
-<h2 id="how-to-use">How to use</h2>
-<ol style="list-style-type: decimal">
-<li>Download at Landsat 8 images (LS8 - OLI/TIRS)</li>
-<li>Reproject all the images (LS8 images) for the interested coordinate reference system (e.g. EPSG:32721)</li>
-<li>For all images remove null values</li>
-<li>Get Digital Elevation Model (DEM) from ASTER</li>
-<li>You must reproject the DEM file for the same coordinate reference system of interest, rename it as <strong>MDT_Sebal.TIF</strong></li>
-<li>Create a <em>GRASS</em> Session with GRASS-GIS software. You need to assign <em>GRASS location</em> and <em>GRASS Mapset</em>. Note that all maps must have the same coordinate reference system (projection). For further information about <em>GRASS</em> you can check <a href="https://grass.osgeo.org/">GRASS-GIS</a>.</li>
-<li>Make sure that all files are in the same folder, <code>SEBAL_v10.py</code> inclusive.</li>
-<li>Launch a text editor file and open <code>SEBAL_v10.py</code>. Find the lines <strong>67, 68, 69</strong>, you will find:</li>
-</ol>
-<pre><code>PERMANENT.open(gisdb=&#39;/home/rafatieppo/Documents/QGIS_SEBAL/20170904/&#39;,
-               location=&#39;sirgas2000utm21s&#39;,
-               create_opts=&#39;EPSG:31981&#39;)</code></pre>
-<p>Replace the text between quotes, e.g.:</p>
-<pre><code>PERMANENT.open(gisdb=&#39;path for YOUR files&#39;,
-               location=&#39;YOUR folder location&#39;,
-               create_opts=&#39;YOUR reference coordinate system&#39;)</code></pre>
-<p>after that, save and close it.</p>
-<ol start="10" style="list-style-type: decimal">
-<li>If use Linux launch the <em>Terminal</em>, or if are Windows user launch <em>DOS Prompt</em>. Once you are in correct folder (that one with all your files) just run <code>python SEBAL_v10.py</code>, and insert the required values.</li>
-</ol>
+
+<h2 id="running">How to run</h2>
+
+You can read the post on: [SEBAL model by means GRASS and PYTHON SEBAL](www) , and watch the video on [YOUTUBE](www).
+
+<h2 id="logs">Logs</h2>
+
+<h3>Mon 2022-07-18 10:50:16 -04</h3>
+- The method to set GRASS GIS environment was changed, now in this script is not created a new `mapset`. In the script just is required to assign a existing `location` and `mapset` .
+- At line 92 was create a string variable `mdtrast_mapset`, it is to make easier the computation region assignement. It provides a condiotion to call MDTrast from any `mapset`.
+
 <h2 id="notes">Notes</h2>
 <ul>
-<li>Tested on Ubuntu 16.04 LTS</li>
 <li>Tested on Ubuntu 18.04 LTS</li>
+<li>Tested on DEBIAN 11</li>
 </ul>
 <h2 id="references" class="unnumbered">References</h2>
 <div id="refs" class="references">

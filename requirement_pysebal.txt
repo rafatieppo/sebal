@@ -1,0 +1,6 @@
+wheel
+numpy
+matplotlib
+Pandas
+grass-session
+grass-script

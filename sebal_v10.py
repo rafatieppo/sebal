@@ -12,20 +12,31 @@
 import math
 import numpy as np
 import os
-from grass_session import Session
+from grass_session import session
 import grass.script as gscript
 from grass.script import core as gcore
-from osgeo import ogr
-
-os.system('clear')
 
 # ------------------------------------------------------------
-# Finding files and assign local variables
+# edit here
+# ------------------------------------------------------------
+gisbase = '/usr/lib/grass78'
+gisdb = '/home/rafatieppo/grassdata'
+location = 'epsg31981'
+mapset = 'PERMANENT'
 
-# path = "/home/rafatieppo/Dropbox/PROFISSIONAL/PROJETOS_PESQUISA/1710_SR_EVAPO/SEBAL_ALGORITHM/."
+# Finding files and assign local variables
 # path = "/media/rafatieppo/SSD_24gb/QGIS_SEBAL/20170904"
-# path = "/home/rafatieppo/Documents/QGIS_SEBAL/20170904/"
-path = "."
+path = '/media/rafatieppo/hd_back/sebal_tutorial/'
+# -------------- edition ends here ---------------------------
+
+# ------------------------------------------------------------
+# assign enviroment
+sinit = session.grass_init(gisbase, gisdb, location, mapset)
+session.get_grass_bin()
+session.get_platform_name()
+gscript.gisenv()
+
+os.system('clear')
 allfiles = os.listdir(path)
 
 mtlfile = []
@@ -36,13 +47,19 @@ for ifile in allfiles:
 
 tiffile = []
 for ifile in allfiles:
-    if ifile.endswith((".tif", ".TIF")):
+    if ifile.endswith((".tif", ".TIF")) and ifile != 'MDT_Sebal.tif':
         print(ifile)
         tiffile.append(ifile)
 
+mdtfile = []
+for ifile in allfiles:
+    if ifile.endswith((".tif", ".TIF")) and ifile == 'MDT_Sebal.tif':
+        print(ifile)
+        mdtfile.append(ifile)
+
 print("------------------------------------------------------------")
-print("We found", len(mtlfile), ".mtl file(s) " "and",
-      len(tiffile), ".tif  file(s)")
+print("We found \n", len(mtlfile), " .mtl file(s) \n",
+      len(tiffile), " .tif file(s), \n", len(mdtfile), " mdtfile.\n")
 print("------------------------------------------------------------")
 
 print("------------------------------------------------------------")
@@ -52,27 +69,29 @@ print("------------------------------------------------------------")
 
 print("------------------------------------------------------------")
 EToi = float(input(
-    "Please type the instantaneous value of reference evapotranspiration (EToi) in the weather station(time of the satellite overpass (mm) : "))
+    "Please type the instantaneous value of reference evapotranspiration (EToi) in the weather station (time of the satellite overpass (mm) : "))
 print("------------------------------------------------------------")
 
 print("------------------------------------------------------------")
 ETo = float(input(
     "Please type the daily value of reference evapotranspiration (ETo) from the weather station (mm): "))
 print("------------------------------------------------------------")
+
 # ------------------------------------------------------------
 # create a PERMANENT mapset
 # create a Session instance
-
-PERMANENT = Session()
-PERMANENT.open(gisdb='/home/rafatieppo/Documents/QGIS_SEBAL/20170904/',
-               location='sirgas2000utm21s',
-               create_opts='EPSG:31981')
+#
+# PERMANENT = Session()
+# PERMANENT.open(gisdb='/home/rafatieppo/grassdata',
+#                location='epsg32721',
+#                create_opts='EPSG:31981')
 
 # ------------------------------------------------------------
 # Spectral radiance
 
+mdtrast_mapset = 'MDT_Sebal@' + mapset 
 gcore.parse_command('g.region', flags='p',
-                    rast='MDT_Sebal@PERMANENT', quiet=True)
+                    rast=mdtrast_mapset, quiet=True)
 
 runCC = gcore.parse_command('g.list', type='raster', pattern='CC_432')
 runRLo = gcore.parse_command('g.list', type='raster', pattern='RLo')
@@ -90,7 +109,7 @@ if runCC == {}:
     print('Top-of-atmosphere reflectance and temperature for Landsat8')
     gcore.parse_command('i.landsat.toar',
                         input=tiffile[0].split('_B')[0] + '_B', output='LS8_corre',
-                        metfile=mtlfile, sensor='oli8',
+                        metfile=mtlfile[0], sensor='oli8',
                         overwrite=True)
     # set some common environmental variables, like:
     os.environ.update(dict(GRASS_COMPRESS_NULLS='1',
@@ -340,7 +359,7 @@ gscript.write_command('v.in.ascii', input='tmp_coldpoint', output='COLDPOINT',
                       stdin='',
                       overwrite='true', quiet='true')
 
-print ('Incoming radiation longwave (IRL - W/m2)')
+print('Incoming radiation longwave (IRL - W/m2)')
 IRL = 'IRL'
 IRLC1 = 0.85
 IRLC2 = 0.09
@@ -500,7 +519,7 @@ HOTPT_Rn = list(dict(HOTPT_Rnz).keys())
 HOTPT_Rn = float(HOTPT_Rn[0].split('||')[1])
 
 
-print ('Fitting aerodynamic resistance, it can take time')
+print('Fitting aerodynamic resistance, it can take time')
 hotptrah_i = 0
 i = 1
 while (abs(hotptrah_i - HOTPT_RAH) > 0.00001):
@@ -724,5 +743,5 @@ gcore.run_command('r.mapcalc', expression="{ETday}={ETof}*{ETo}".format(
     overwrite=True, quiet=True)
 print('It is done')
 print("------------------------------------------------------------")
-print("@geoclimamt")
+print("@rafatieppo")
 # ------------------------------------------------------------

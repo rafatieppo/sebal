@@ -9,13 +9,24 @@
 
 <h2 id="running">How to run</h2>
 
-You can read the post on: [SEBAL model by means GRASS and PYTHON SEBAL](www) , and watch the video on [YOUTUBE](www).
+You can read the post on:
+<ul>
+<li>[SEBAL model by means GRASS and PYTHON SEBAL](https://rafatieppo.github.io/post/2022_07_13_sebalpy_grass/)</li>
+</ul>
+
+You can find the video:
+<ul>
+<li>[Part1 - Pytyhon Environment and install packages](https://youtu.be/ffrZ6_VPxDQ)</li>
+<li>[Part2 - Config and Run the script](https://youtu.be/z96M6DZ5noY)</li>
+</ul
 
 <h2 id="logs">Logs</h2>
 
 <h3>Mon 2022-07-18 10:50:16 -04</h3>
-- The method to set GRASS GIS environment was changed, now in this script is not created a new `mapset`. In the script just is required to assign a existing `location` and `mapset` .
-- At line 92 was create a string variable `mdtrast_mapset`, it is to make easier the computation region assignement. It provides a condiotion to call MDTrast from any `mapset`.
+<ul>
+<li>The method to set GRASS GIS environment was changed, now in this script is not created a new `mapset`. In the script just is required to assign a existing `location` and `mapset`.</li>
+<li>At line 92 was create a string variable `mdtrast_mapset`, it is to make easier the computation region assignement. It provides a condiotion to call MDTrast from any `mapset`.</li>
+</ul>
 
 <h2 id="notes">Notes</h2>
 <ul>
